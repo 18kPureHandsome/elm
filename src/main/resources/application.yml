@@ -1,0 +1,15 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1/sell?characterEncoding=utf-8&useSSL=false
+server:
+  servlet:
+    context-path: /elm
+#logging:
+#  pattern:  //配置日志路径
+#  pattern:
+#    console: "%d - %msg%n" // 配置日志格式
+#  file:  //配置日志文件
