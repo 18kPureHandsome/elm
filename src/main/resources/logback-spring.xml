@@ -18,12 +18,12 @@
             <pattern>
                 %msg%n
             </pattern>
-            <!--滚动策略-->
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!--路径-->
-                <fileNamePattern>/var/log/tomcat/elm/info.%d.log</fileNamePattern>
-            </rollingPolicy>
         </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>/Users/shuaige/Documents/logs/elm/info.%d.log</fileNamePattern>
+        </rollingPolicy>
     </appender>
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--只输出error级别的日志-->
@@ -34,16 +34,17 @@
             <pattern>
                 %msg%n
             </pattern>
-            <!--滚动策略-->
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!--路径-->
-                <fileNamePattern>/var/log/tomcat/elm/error.%d.log</fileNamePattern>
-            </rollingPolicy>
         </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>/Users/shuaige/Documents/logs/elm/error.%d.log</fileNamePattern>
+        </rollingPolicy>
     </appender>
 
     <root level="info">
         <appender-ref ref="consolelog" />
         <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
     </root>
 </configuration>
