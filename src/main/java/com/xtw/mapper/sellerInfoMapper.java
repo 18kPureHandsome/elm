@@ -1,7 +1,9 @@
 package com.xtw.mapper;
 
 import com.xtw.entity.sellerInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface sellerInfoMapper {
     int deleteByPrimaryKey(String id);
 

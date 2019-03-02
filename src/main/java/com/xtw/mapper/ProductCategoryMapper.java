@@ -1,7 +1,9 @@
 package com.xtw.mapper;
 
 import com.xtw.entity.ProductCategory;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ProductCategoryMapper {
     int deleteByPrimaryKey(Integer categoryId);
 
