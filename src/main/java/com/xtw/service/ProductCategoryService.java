@@ -2,6 +2,8 @@ package com.xtw.service;
 
 import com.xtw.entity.ProductCategory;
 
+import java.util.List;
+
 /**
  * @author : tianwen.xiao
  * @date : created in 2019/3/2 1:11 AM
@@ -19,4 +21,6 @@ public interface ProductCategoryService {
     int updateByPrimaryKeySelective(ProductCategory record);
 
     int updateByPrimaryKey(ProductCategory record);
+
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 }

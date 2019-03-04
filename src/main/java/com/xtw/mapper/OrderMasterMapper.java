@@ -1,7 +1,9 @@
 package com.xtw.mapper;
 
 import com.xtw.entity.OrderMaster;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface OrderMasterMapper {
     int deleteByPrimaryKey(String orderId);
 

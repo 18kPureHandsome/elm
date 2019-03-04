@@ -1,12 +1,17 @@
-package com.xtw.mapper;
+package com.xtw.service;
 
 import com.xtw.entity.ProductInfo;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface ProductInfoMapper {
+/**
+ * @author : tianwen.xiao
+ * @ClassName : ProductInfoService
+ * @Description :
+ * @date : created in 2019/3/4 11:44 AM
+ * @Version : 1.0
+ */
+public interface ProductInfoService {
     int deleteByPrimaryKey(String productId);
 
     int insert(ProductInfo record);
@@ -19,6 +24,5 @@ public interface ProductInfoMapper {
 
     int updateByPrimaryKey(ProductInfo record);
 
-    List<ProductInfo> findByProductStatus(Integer status);
-
+    List<ProductInfo> findUpAll();
 }

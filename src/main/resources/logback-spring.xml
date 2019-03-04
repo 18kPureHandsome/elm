@@ -41,6 +41,8 @@
             <fileNamePattern>/Users/shuaige/Documents/logs/elm/error.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
+    <!-- 打印mybatis sql日志 -->
+    <logger name="com.xtw.mapper" level="debug"/>
 
     <root level="info">
         <appender-ref ref="consolelog" />

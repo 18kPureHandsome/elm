@@ -6,6 +6,8 @@ import com.xtw.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author : tianwen.xiao
  * @date : created in 2019/3/2 1:13 AM
@@ -14,35 +16,40 @@ import org.springframework.stereotype.Service;
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Autowired
-    private ProductCategoryMapper mapper;
+    private ProductCategoryMapper productCategoryMapper;
 
     @Override
     public int deleteByPrimaryKey(Integer categoryId) {
-        return mapper.deleteByPrimaryKey(categoryId);
+        return productCategoryMapper.deleteByPrimaryKey(categoryId);
     }
 
     @Override
     public int insert(ProductCategory record) {
-        return mapper.insert(record);
+        return productCategoryMapper.insert(record);
     }
 
     @Override
     public int insertSelective(ProductCategory record) {
-        return mapper.insertSelective(record);
+        return productCategoryMapper.insertSelective(record);
     }
 
     @Override
     public ProductCategory selectByPrimaryKey(Integer categoryId) {
-        return mapper.selectByPrimaryKey(categoryId);
+        return productCategoryMapper.selectByPrimaryKey(categoryId);
     }
 
     @Override
     public int updateByPrimaryKeySelective(ProductCategory record) {
-        return mapper.updateByPrimaryKeySelective(record);
+        return productCategoryMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(ProductCategory record) {
-        return mapper.updateByPrimaryKey(record);
+        return productCategoryMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
+        return productCategoryMapper.findByCategoryTypeIn(categoryTypeList);
     }
 }
