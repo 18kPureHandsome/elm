@@ -12,7 +12,8 @@ public class ResultVoUtil {
         return new ResultVo(0,"成功",object);
     }
 
-    public static ResultVo ErroeVo(){
-        return new ResultVo(1,"失败",null);
+    public static ResultVo ErroeVo(Integer code ,String msg){
+
+        return new ResultVo(code,msg,null);
     }
 }

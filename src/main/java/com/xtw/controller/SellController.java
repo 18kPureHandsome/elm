@@ -36,7 +36,7 @@ public class SellController {
     private ProductCategoryService productCategoryService;
 
     @GetMapping("/product/list")
-    public ResultVo productList(){
+    public ResultVo productList() throws Exception{
         //1.查询所有上架商品
         List<ProductInfo> productInfoList = productInfoService.findUpAll();
         //2.查询类目
