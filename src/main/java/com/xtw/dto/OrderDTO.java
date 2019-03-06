@@ -1,14 +1,21 @@
-package com.xtw.entity;
+package com.xtw.dto;
 
-import com.xtw.enums.OrderStatusEnums;
-import com.xtw.enums.PayStatusEnums;
+import com.xtw.entity.OrderDetail;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
-@Data
-public class OrderMaster {
+import java.util.List;
 
+/**
+ * @author : tianwen.xiao
+ * @ClassName : OrderDTO
+ * @Description :
+ * @date : created in 2019/3/6 2:42 PM
+ * @Version : 1.0
+ */
+@Data
+public class OrderDTO {
     /** 订单id*/
     private String orderId;
 
@@ -28,10 +35,10 @@ public class OrderMaster {
     private BigDecimal orderAmount;
 
     /** 订单状态*/
-    private Integer orderStatus = OrderStatusEnums.NEW.getCode();
+    private Integer orderStatus;
 
     /** 支付状态*/
-    private Integer payStatus = PayStatusEnums.WAIT.getCode();
+    private Integer payStatus;
 
     /** 创建时间*/
     private Date createTime;
@@ -39,5 +46,5 @@ public class OrderMaster {
     /** 修改时间*/
     private Date updateTime;
 
-
+    List<OrderDetail> orderDetailList;
 }

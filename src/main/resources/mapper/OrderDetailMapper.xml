@@ -139,4 +139,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where detail_id = #{detailId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findByOrderId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_detail
+    where order_id = #{orderid,jdbcType=VARCHAR}
+  </select>
 </mapper>

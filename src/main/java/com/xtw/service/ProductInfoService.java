@@ -1,5 +1,6 @@
 package com.xtw.service;
 
+import com.xtw.dto.CartDTO;
 import com.xtw.entity.ProductInfo;
 
 import java.util.List;
@@ -18,11 +19,28 @@ public interface ProductInfoService {
 
     int insertSelective(ProductInfo record);
 
-    ProductInfo selectByPrimaryKey(String productId);
+    ProductInfo findOne(String productId);
 
     int updateByPrimaryKeySelective(ProductInfo record);
 
     int updateByPrimaryKey(ProductInfo record);
 
+    /**
+     * 查询所有上架的商品
+     * @return
+     */
     List<ProductInfo> findUpAll();
+
+    /**
+     * 加库存
+     * @param cartDTOList
+     */
+    void increaseStock(List<CartDTO> cartDTOList) throws Exception;
+
+    /**
+     * 减库存
+     * @param cartDTOList
+     */
+    void decreaseStock(List<CartDTO> cartDTOList) throws Exception;
+
 }

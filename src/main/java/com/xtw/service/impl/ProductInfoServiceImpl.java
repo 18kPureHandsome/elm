@@ -1,11 +1,15 @@
 package com.xtw.service.impl;
 
+import com.xtw.dto.CartDTO;
 import com.xtw.entity.ProductInfo;
+import com.xtw.enums.ExceptionEnums;
 import com.xtw.enums.ProductStatusEnum;
+import com.xtw.exception.MyException;
 import com.xtw.mapper.ProductInfoMapper;
 import com.xtw.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,7 +42,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     @Override
-    public ProductInfo selectByPrimaryKey(String productId) {
+    public ProductInfo findOne(String productId) {
         return productInfoMapper.selectByPrimaryKey(productId);
     }
 
@@ -55,5 +59,37 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override
     public List<ProductInfo> findUpAll() {
         return productInfoMapper.findByProductStatus(ProductStatusEnum.UP.getCode());
+    }
+
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public void increaseStock(List<CartDTO> cartDTOList) throws Exception{
+        for (CartDTO cartDTO: cartDTOList) {
+            ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(cartDTO.getProductId());
+            if(productInfo == null){
+                throw new MyException(ExceptionEnums.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+
+            productInfo.setProductStock(result);
+            productInfoMapper.updateByPrimaryKey(productInfo);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public void decreaseStock(List<CartDTO> cartDTOList) throws Exception{
+        for (CartDTO cartDTO: cartDTOList) {
+            ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(cartDTO.getProductId());
+            if(productInfo == null){
+                throw new MyException(ExceptionEnums.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+            if(result < 0 ){
+                throw new MyException(ExceptionEnums.PRODUCT_STOCK_LOW);
+            }
+            productInfo.setProductStock(result);
+            productInfoMapper.updateByPrimaryKey(productInfo);
+        }
     }
 }

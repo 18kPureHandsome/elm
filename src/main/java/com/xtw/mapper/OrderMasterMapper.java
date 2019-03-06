@@ -3,6 +3,8 @@ package com.xtw.mapper;
 import com.xtw.entity.OrderMaster;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface OrderMasterMapper {
     int deleteByPrimaryKey(String orderId);
@@ -16,4 +18,6 @@ public interface OrderMasterMapper {
     int updateByPrimaryKeySelective(OrderMaster record);
 
     int updateByPrimaryKey(OrderMaster record);
+
+    List<OrderMaster> findByBuyerOpendId(String opendid);
 }
