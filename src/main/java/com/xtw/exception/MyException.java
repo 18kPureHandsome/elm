@@ -19,4 +19,9 @@ public class MyException extends Exception {
         super(enums.getMessage());
         this.code = enums.getCode();
     }
+
+    public MyException(Integer code,String message){
+        super(message);
+        this.code = code;
+    }
 }

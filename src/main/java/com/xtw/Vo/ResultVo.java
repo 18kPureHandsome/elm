@@ -7,11 +7,12 @@ import lombok.Data;
  * 回调信息vo
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVo<T> {
 
-    private Integer code;
+    private Integer code = 0;
 
-    private String msg;
+    private String msg = "";
 
     private T data;
 

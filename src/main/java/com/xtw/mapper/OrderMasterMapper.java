@@ -19,5 +19,5 @@ public interface OrderMasterMapper {
 
     int updateByPrimaryKey(OrderMaster record);
 
-    List<OrderMaster> findByBuyerOpendId(String opendid);
+    List<OrderMaster> findByBuyerOpenId(String openid);
 }

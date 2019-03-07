@@ -1,5 +1,6 @@
 package com.xtw.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xtw.entity.OrderDetail;
 import lombok.Data;
 
@@ -41,9 +42,11 @@ public class OrderDTO {
     private Integer payStatus;
 
     /** 创建时间*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
     /** 修改时间*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;

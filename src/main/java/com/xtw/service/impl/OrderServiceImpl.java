@@ -57,7 +57,8 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderdto.getOrderDetailList()) {
             ProductInfo productInfo = productInfoService.findOne(orderDetail.getProductId());
             if(productInfo == null){
-                new MyException(ExceptionEnums.PRODUCT_NOT_EXIST);
+                log.error("【创建订单】请求商品不存在 orderdto = {}",orderdto);
+                throw new MyException(ExceptionEnums.PRODUCT_NOT_EXIST);
             }
 
             //2.计算订单总价
@@ -76,9 +77,9 @@ public class OrderServiceImpl implements OrderService {
         //3.写入订单数据库（order_master,order_detail）
 
         OrderMaster orderMaster = new OrderMaster();
+        orderdto.setOrderId(orderid);
         BeanUtils.copyProperties(orderdto,orderMaster);
         orderMaster.setOrderAmount(orderAmout);
-        orderMaster.setOrderId(orderid);
         orderMaster.setOrderStatus(OrderStatusEnums.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnums.WAIT.getCode());
         orderMasterMapper.insert(orderMaster);
@@ -109,8 +110,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> findList(String opendid) {
-        List<OrderMaster> orderMasterList = orderMasterMapper.findByBuyerOpendId(opendid);
+    public List<OrderDTO> findList(String openid) {
+        List<OrderMaster> orderMasterList = orderMasterMapper.findByBuyerOpenId(openid);
 
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for(OrderMaster orderMaster : orderMasterList){
@@ -204,5 +205,19 @@ public class OrderServiceImpl implements OrderService {
             throw new MyException(ExceptionEnums.ORDER_UPDATE_FAIL);
         }
         return orderdto;
+    }
+
+    @Override
+    public OrderDTO checkOrderOwner(String orderid, String openid) throws Exception {
+        OrderDTO orderDTO = this.findOne(orderid);
+        if(orderDTO == null){
+            log.error("[校验当前用户订单]  订单为空，orderid = {},openid = {}",orderid,openid);
+            throw new MyException(ExceptionEnums.ORDER_NOT_EXIST);
+        }
+        if(!orderDTO.getBuyerOpenid().equalsIgnoreCase(openid)){
+            log.error("[校验当前用户订单]  订单openid不一致，orderid = {},openid = {}",orderid,openid);
+            throw new MyException(ExceptionEnums.ORDER_NOT_EXIST);
+        }
+        return orderDTO;
     }
 }

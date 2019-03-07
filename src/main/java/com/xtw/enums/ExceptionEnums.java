@@ -29,6 +29,10 @@ public enum ExceptionEnums {
     ORDER_DETAIL_EMPTY(16,"订单详情为空"),
 
     ORDER_PAY_STATUS_ERROR(17,"订单支付状态不正确"),
+
+    PARAM_ERROR(18,"参数不正确"),
+
+    CART_EMPTY(19,"购物车不能为空"),
     ;
 
     private Integer code;

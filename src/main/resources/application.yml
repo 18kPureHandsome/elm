@@ -13,6 +13,8 @@ spring:
       max-wait-millis: 60000
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 30000
+  jackson:
+    default-property-inclusion: non_null
 
 
 server:
@@ -21,4 +23,5 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.xtw.entity
+
 
