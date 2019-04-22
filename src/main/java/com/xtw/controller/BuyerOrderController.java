@@ -58,6 +58,29 @@ public class BuyerOrderController {
         return ResultVoUtil.SuccessVo(map);
 
     }
+
+    @GetMapping("/testcreate")
+    public ResultVo<Map<String,String>> testcreate () throws Exception{
+        OrderForm orderForm = new OrderForm();
+        orderForm.setName("张三");
+        orderForm.setPhone("18868822111");
+        orderForm.setAddress("慕课网总部");
+        orderForm.setOpenid("ew3euwhd7sjw9diwkq");
+        orderForm.setItems("[{productId: \"111\",productQuantity: 1}]");
+        OrderDTO orderDTO = OrderForm2OrderDTO.converter(orderForm);
+        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+            log.error("【创建订单】 购物车不能为空 ");
+            throw new MyException(ExceptionEnums.CART_EMPTY);
+        }
+
+        OrderDTO orderResult = orderService.create(orderDTO);
+        Map<String,String> map = new HashMap<>(1);
+        map.put("orderid",orderResult.getOrderId());
+        return ResultVoUtil.SuccessVo(map);
+
+    }
+
+
     /**
      * 订单列表
      */

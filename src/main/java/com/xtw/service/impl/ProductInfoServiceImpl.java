@@ -8,6 +8,8 @@ import com.xtw.exception.MyException;
 import com.xtw.mapper.ProductInfoMapper;
 import com.xtw.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,12 +59,14 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     @Override
+    @Cacheable(cacheNames = "productlist" , key="123")
     public List<ProductInfo> findUpAll() {
         return productInfoMapper.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
 
     @Override
     @Transactional(rollbackFor=Exception.class)
+    @CacheEvict(value = "productlist" , key="123")
     public void increaseStock(List<CartDTO> cartDTOList) throws Exception{
         for (CartDTO cartDTO: cartDTOList) {
             ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(cartDTO.getProductId());
@@ -78,6 +82,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     @Transactional(rollbackFor=Exception.class)
+    @CacheEvict(value = "productlist" , key="123")
     public void decreaseStock(List<CartDTO> cartDTOList) throws Exception{
         for (CartDTO cartDTO: cartDTOList) {
             ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(cartDTO.getProductId());

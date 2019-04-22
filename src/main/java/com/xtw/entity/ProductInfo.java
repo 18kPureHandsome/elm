@@ -2,6 +2,7 @@ package com.xtw.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 /**
@@ -12,7 +13,8 @@ import java.util.Date;
  * @Version : 1.0
  */
 @Data
-public class ProductInfo {
+public class ProductInfo implements Serializable {
+    private static final long serialVersionUID = -6112190453294786350L;
     /** id */
     private String productId;
 
